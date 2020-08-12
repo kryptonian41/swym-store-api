@@ -20,15 +20,6 @@ mongoose.connection.on('connected', () =>
 )
 mongoose.connection.on('error', () => console.log(error('Database Connected')))
 
-process.on('SIGINT', function () {
-  mongoose.connection.close(function () {
-    console.log(
-      'Mongoose default connection is disconnected due to application termination'
-    )
-    process.exit(0)
-  })
-})
-
 export const getDbConnection = () =>
   new Promise((res, rej) => {
     if (dbConnection.readyState === 1) res(dbConnection)

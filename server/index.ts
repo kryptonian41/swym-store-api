@@ -7,7 +7,7 @@ import '@/commons/mongoDb/index'
 import AdminRouter from './routes/admin'
 import ApiRouter from './routes/api'
 import { info } from '@/commons/chalks'
-import './updateStoresTask'
+import './cornJobSetupAndCleanUp'
 
 const app = express()
 
