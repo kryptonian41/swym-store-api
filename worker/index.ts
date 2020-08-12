@@ -1,12 +1,13 @@
+import { info, error } from '@/commons/chalks'
 import '@/commons/mongoDb'
 import { taskQueueName } from '@/commons/TaskQueue'
 import TaskTypes from '@/commons/TaskTypes'
 import { Worker } from 'bullmq'
 import dotenv from 'dotenv'
+import AddNewStoreHandler from './taskHandlers/addNewStore'
 import FreshDatafetchFromSourceHandler from './taskHandlers/freshStoreDataFetchFromSource'
 import GetStoreToUpdateHandler from './taskHandlers/getStoreToUpdate'
 import UpdateStoreDataFromSourceHandler from './taskHandlers/updateStoreDataFromSource'
-import { info } from '@/commons/chalks'
 
 // Loading secrets into the process environment
 dotenv.config()
@@ -20,7 +21,10 @@ const worker = new Worker(taskQueueName, async (job) => {
     )
   )
   switch (jobName) {
-    case TaskTypes.ADD_NEW_STORE:
+    case TaskTypes.ADD_NEW_STORE: {
+      await AddNewStoreHandler(job)
+      break
+    }
     case TaskTypes.FRESH_DATA_FETCH_FROM_SOURCE: {
       await FreshDatafetchFromSourceHandler(job)
       break
@@ -35,6 +39,7 @@ const worker = new Worker(taskQueueName, async (job) => {
     }
 
     default:
+      console.log(error(`Invalid task type ${job.name}`))
       break
   }
 })
