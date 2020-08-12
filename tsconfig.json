@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "rootDir": ".",
+    "module": "CommonJS",
+    "target": "ES5",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "importHelpers": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "./build"],
+  "ts-node": {
+    "transpileOnly": true
+  }
+}
