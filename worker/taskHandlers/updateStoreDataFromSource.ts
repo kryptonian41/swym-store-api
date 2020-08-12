@@ -1,5 +1,6 @@
 import SourceModuleToKeyMapping from '@/commons/SourceModule/SourceModuleKeyMapping'
 import Store from '@/commons/mongoDb/models/StoreModel'
+import _ from 'lodash'
 
 export const handler = async (job) => {
   const { domain, source } = job.data
@@ -11,7 +12,7 @@ export const handler = async (job) => {
 
   if (!isUpdatedDataAvailable) return
 
-  const storeData = await SourceModule.fetchData(domain)
+  const storeDataFromSource = await SourceModule.fetchData(domain)
   await Store.findOneAndUpdate(
     {
       domain,
@@ -19,15 +20,12 @@ export const handler = async (job) => {
     {
       lastUpdated: new Date(),
       isPopulated: true,
-      dateAdded: new Date(),
-      sources: [source],
-      $set: {
-        [`sourcesData.${source}`]: storeData,
+      $addToSet: {
+        sources: source,
       },
-    },
-    {
-      new: true,
-      upsert: true,
+      $set: {
+        [`sourcesData.${source}`]: storeDataFromSource,
+      },
     }
   )
 }

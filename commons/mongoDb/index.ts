@@ -11,6 +11,7 @@ mongoose.connect(dbURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 })
 dbConnection = mongoose.connection
 

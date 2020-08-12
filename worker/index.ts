@@ -6,12 +6,19 @@ import dotenv from 'dotenv'
 import FreshDatafetchFromSourceHandler from './taskHandlers/freshStoreDataFetchFromSource'
 import GetStoreToUpdateHandler from './taskHandlers/getStoreToUpdate'
 import UpdateStoreDataFromSourceHandler from './taskHandlers/updateStoreDataFromSource'
+import { info } from '@/commons/chalks'
 
 // Loading secrets into the process environment
 dotenv.config()
 
 const worker = new Worker(taskQueueName, async (job) => {
   const { name: jobName } = job
+  console.log(
+    info(
+      'Executing: ',
+      JSON.stringify({ name: jobName, data: job.data }, null, 2)
+    )
+  )
   switch (jobName) {
     case TaskTypes.ADD_NEW_STORE:
     case TaskTypes.FRESH_DATA_FETCH_FROM_SOURCE: {

@@ -13,7 +13,7 @@ export interface IStoreSchema extends mongoose.Document {
 const StoreSchema = new mongoose.Schema<IStoreSchema>({
   name: { type: String },
   domain: { type: String, required: true },
-  isPopulated: { type: String, required: false },
+  isPopulated: { type: Boolean, required: false },
   lastUpdated: { type: Date, required: false },
   dateAdded: { type: Date, required: false },
   sources: { type: Array },

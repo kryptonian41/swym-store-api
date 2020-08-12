@@ -20,7 +20,7 @@ export class BuiltWith implements ISourceModuleBase {
     })
   }
   isUpdatedDataAvailable(domainName: string): boolean {
-    throw new Error('Method not implemented.')
+    return true
   }
   async fetchData(domainName: string) {
     const storeData = await this.axiosInstance
