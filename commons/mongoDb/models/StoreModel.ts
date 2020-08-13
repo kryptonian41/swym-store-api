@@ -20,5 +20,6 @@ const StoreSchema = new mongoose.Schema<IStoreSchema>({
   sourcesData: { type: Object },
 })
 
-var Store = mongoose.model<IStoreSchema>('Store', StoreSchema)
+const Store = mongoose.model<IStoreSchema>('Store', StoreSchema)
+
 export default Store

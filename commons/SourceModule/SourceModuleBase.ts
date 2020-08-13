@@ -3,7 +3,7 @@ export interface ISourceModuleBase {
   isUpdatedDataAvailable(domainName: string): boolean
   updateData(domainName: string)
   sanitizeData<T>(data: T)
-  isDataPresent(domainName: string): boolean
+  isDataPresent(domainName: string): boolean | Promise<boolean>
 }
 
 export default ISourceModuleBase

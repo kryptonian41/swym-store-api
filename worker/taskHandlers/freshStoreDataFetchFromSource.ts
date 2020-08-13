@@ -5,6 +5,7 @@ export const handler = async (job) => {
   const { domain, source } = job.data
   const SourceModule = SourceModuleToKeyMapping[source]
   const storeData = await SourceModule.fetchData(domain)
+  if (!storeData) return
   await Store.findOneAndUpdate(
     {
       domain,

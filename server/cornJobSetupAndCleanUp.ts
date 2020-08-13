@@ -4,7 +4,7 @@ import { warning, info } from '@/commons/chalks'
 import mongoose from 'mongoose'
 
 const repeatConfig = {
-  every: 100000,
+  every: 1000000,
 }
 
 TaskQueue.add(
@@ -27,10 +27,12 @@ process.on('SIGTERM', async function () {
     )
 
     const remainingRepeatableJobs = await TaskQueue.getRepeatableJobs()
-    console.log(info('Remaining Cron Jobs:'), remainingRepeatableJobs)
+    console.log(warning('Remaining Cron Jobs:'), remainingRepeatableJobs)
     await mongoose.connection.close()
     console.log(
-      'Mongoose default connection is disconnected due to application termination'
+      warning(
+        'Mongoose default connection is disconnected due to application termination'
+      )
     )
     process.exit(0)
   } catch (error) {
@@ -53,7 +55,9 @@ process.on('SIGINT', async function () {
     console.log(info('Remaining Cron Jobs:'), remainingRepeatableJobs)
     await mongoose.connection.close()
     console.log(
-      'Mongoose default connection is disconnected due to application termination'
+      warning(
+        'Mongoose default connection is disconnected due to application termination'
+      )
     )
     process.exit(0)
   } catch (error) {

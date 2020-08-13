@@ -2,10 +2,9 @@ import ISourceModuleBase from '../SourceModuleBase'
 import axios, { AxiosInstance } from 'axios'
 import _ from 'lodash'
 
-export class BuiltWith implements ISourceModuleBase {
-  private apiKey: string
+export class BuiltWithMock implements ISourceModuleBase {
   private axiosInstance: AxiosInstance
-  private rootApiURL: string = 'https://api.builtwith.com/v15/api.json'
+  private rootApiURL: string = 'http://localhost:3000/stores'
   private temporaryResponse: any
   constructor() {
     if (!process.env.BUILTWITH_API_KEY)
@@ -13,12 +12,8 @@ export class BuiltWith implements ISourceModuleBase {
         `No API key found for BuiltWith in the process environment. 
         Please add a the API key as "BUILTWITH_API_KEY" into the process environment`
       )
-    this.apiKey = process.env.BUILTWITH_API_KEY
     this.axiosInstance = axios.create({
       baseURL: this.rootApiURL,
-      params: {
-        KEY: this.apiKey,
-      },
     })
   }
   isUpdatedDataAvailable(domain: string): boolean {
@@ -32,7 +27,7 @@ export class BuiltWith implements ISourceModuleBase {
     if (!isDataPresent) {
       return null
     }
-    const { Result, Meta, Attributes } = this.temporaryResponse.Results[0]
+    const { Result, Meta, Attributes } = this.temporaryResponse[0]
     const storeData = _.set<any>({}, 'techstack', Result)
     _.set(storeData, 'techstack.technologies', Result.Paths[0].Technologies)
     _.unset(storeData, 'techstack.Paths')
@@ -51,12 +46,11 @@ export class BuiltWith implements ISourceModuleBase {
     const response = await this.axiosInstance
       .get('/', {
         params: {
-          LOOKUP: domain,
-          ...this.axiosInstance.defaults.params,
+          Lookup: domain,
         },
       })
       .then((res) => res.data)
-    if (response.Errors.length > 0) {
+    if (response?.Errors?.length > 0) {
       console.log('BuiltWith -> fetchData -> response', response.Errors)
       return false
     }
@@ -65,4 +59,4 @@ export class BuiltWith implements ISourceModuleBase {
   }
 }
 
-export default BuiltWith
+export default BuiltWithMock

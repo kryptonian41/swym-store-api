@@ -8,10 +8,14 @@ import {
 import { TaskQueue } from '@/commons/TaskQueue'
 import TaskTypes from '@/commons/TaskTypes'
 import Store, { IStoreSchema } from '@/commons/mongoDb/models/StoreModel'
+import HttpStatus from 'http-status-codes'
 
 export const addNewStore = async (req, res, next) => {
   const { domain } = req.body
-  if (!domain) return next(new Error('Missing required request parameteres'))
+  if (!domain) {
+    res.status(HttpStatus.BAD_REQUEST)
+    return next(new Error('Missing required request parameteres'))
+  }
   let store = await getStoreByDomain(domain)
   if (!store) {
     store = await createNewEmptyStore(domain)
@@ -23,7 +27,10 @@ export const addNewStore = async (req, res, next) => {
 export const getStoreInfo = async (req, res, next) => {
   const { domain, id } = req.query
 
-  if (!domain && !id) return next(new Error('Invalid request parameters'))
+  if (!domain && !id) {
+    res.status(HttpStatus.BAD_REQUEST)
+    return next(new Error('Invalid request parameters'))
+  }
 
   let StoreInfo
   if (domain) {
@@ -38,8 +45,10 @@ export const getStoreInfo = async (req, res, next) => {
 
 export const getStoresInfo = async (req, res, next) => {
   const { domains, ids } = req.body
-  if (!domains && !ids)
+  if (!domains && !ids) {
+    res.status(HttpStatus.BAD_REQUEST)
     return next(new Error('Cannot find domains or ids in the reqyest body'))
+  }
   if (ids) {
     const stores = await getStoresByIds(ids)
     res.json(stores)
