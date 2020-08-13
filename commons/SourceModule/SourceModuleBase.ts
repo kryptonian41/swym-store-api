@@ -1,8 +1,7 @@
 export interface ISourceModuleBase {
   fetchData(domainName: string)
   isUpdatedDataAvailable(domainName: string): boolean
-  updateData(domainName: string)
-  sanitizeData<T>(data: T)
+  getSanitizedData()
   isDataPresent(domainName: string): boolean | Promise<boolean>
 }
 
