@@ -25,19 +25,20 @@ app.use(bodyParser.json())
 
 const apiRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: 70, // limit each IP to 100 requests per windowMs
 })
 
 const speedLimiter = slowDown({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  delayAfter: 100, // allow 100 requests per 15 minutes, then...
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  delayAfter: 35, // allow 100 requests per 15 minutes, then...
   delayMs: 500, // begin adding 500ms of delay per request above 100:
 })
 
 // Router Configuration
 app.use('/api', apiRateLimiter, speedLimiter)
+app.use('/admin', apiRateLimiter, speedLimiter)
 app.use('/api/v1', ApiRouter)
-app.use('/admin', AdminRouter)
+app.use('/admin/v1', AdminRouter)
 
 // Request Error handler
 app.use((err, _req, res, next) => {
