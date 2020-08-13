@@ -6,10 +6,9 @@
   "scripts": {
     "dev:worker": "env-cmd ts-node-dev -r tsconfig-paths/register -T ./worker/index.ts",
     "dev:server": "env-cmd ts-node-dev -r tsconfig-paths/register -T ./server/index.ts",
-    "start:worker": "env-cmd ts-node -r tsconfig-paths/register index-worker.ts",
-    "start:queue": "env-cmd ts-node -r tsconfig-paths/register index.ts",
-    "mock:builtwith": "json-server --watch ./mock/BuiltWith/data.json",
-    "compile": "env-cmd tsc"
+    "start:worker": "env-cmd ts-node -r tsconfig-paths/register ./worker/index.ts",
+    "start:server": "env-cmd ts-node -r tsconfig-paths/register ./server/index.ts",
+    "mock:builtwith": "json-server --watch ./mock/BuiltWith/data.json"
   },
   "keywords": [],
   "author": "",
@@ -34,7 +33,9 @@
     "mongoose": "^5.9.28",
     "morgan": "^1.10.0",
     "redis": "^3.0.2",
-    "sleep": "^6.3.0"
+    "sleep": "^6.3.0",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "chalk": "^4.1.0",

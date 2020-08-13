@@ -36,7 +36,7 @@ const speedLimiter = slowDown({
 
 // Router Configuration
 app.use('/api', apiRateLimiter, speedLimiter)
-app.use('/api', ApiRouter)
+app.use('/api/v1', ApiRouter)
 app.use('/admin', AdminRouter)
 
 // Request Error handler
