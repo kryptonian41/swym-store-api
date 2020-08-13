@@ -62,11 +62,14 @@ export const getStoresInfo = async (req, res, next) => {
 }
 
 export const getListOfAvailableStores = async (req, res) => {
+  const { page = 1, pageSize = 10 } = req.query
+  const totalCount = await Store.estimatedDocumentCount()
   let allStores: any[] = await Store.find(
     {
       isPopulated: true,
     },
-    { domain: 1, _id: 1 }
+    { domain: 1, _id: 1 },
+    { skip: (page - 1) * pageSize, limit: pageSize }
   )
-  res.json(allStores)
+  res.json({ count: totalCount, pageSize, stores: allStores })
 }
