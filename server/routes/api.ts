@@ -1,16 +1,14 @@
 import express from 'express'
-import Store from '@/commons/mongoDb/models/StoreModel'
+import {
+  getStoreInfo,
+  getListOfAvailableStores,
+  getStoresInfo,
+} from '../controllers/storeController'
+
 const router = express.Router()
 
-router.get('/list-stores', (req, res) => {})
-router.get('/store-info', async (req, res) => {
-  const { domain } = req.query
-  console.log('domain', domain)
-  const storeData = await Store.findOne({
-    domain: domain as string,
-  })
-  res.json(storeData)
-})
-router.post('/stores', (req, res) => {})
+router.get('/list-stores', getListOfAvailableStores)
+router.get('/store-info', getStoreInfo)
+router.post('/stores', getStoresInfo)
 
 export default router
