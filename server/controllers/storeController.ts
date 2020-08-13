@@ -62,11 +62,11 @@ export const getStoresInfo = async (req, res, next) => {
 }
 
 export const getListOfAvailableStores = async (req, res) => {
-  let allStores: any[] = await Store.find({})
-  // Use mongoDB source to fetch only the required values from the database
-  allStores = allStores.map((store: IStoreSchema) => ({
-    id: store.id,
-    domain: store.domain,
-  }))
+  let allStores: any[] = await Store.find(
+    {
+      isPopulated: true,
+    },
+    { domain: 1, _id: 1 }
+  )
   res.json(allStores)
 }
