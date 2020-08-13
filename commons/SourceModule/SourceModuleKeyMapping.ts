@@ -1,5 +1,5 @@
 import BuiltWith from './BuiltWith'
-import BUildWithMock, { BuiltWithMock } from './BuiltWith/mock'
+import { BuiltWithMock } from './BuiltWith/mock'
 import { ISourceModuleBase } from './SourceModuleBase'
 
 interface ModuleKeyMapping {
