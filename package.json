@@ -8,7 +8,7 @@
     "dev:server": "env-cmd ts-node-dev -r tsconfig-paths/register -T ./server/index.ts",
     "start:worker": "env-cmd ts-node -r tsconfig-paths/register ./worker/index.ts",
     "start:server": "env-cmd ts-node -r tsconfig-paths/register ./server/index.ts",
-    "mock:builtwith": "json-server --watch ./mock/BuiltWith/data.json"
+    "mock:builtwith": "json-server --watch ./mock-api-servers/BuiltWith/data.json"
   },
   "keywords": [],
   "author": "",
