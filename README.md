@@ -4,9 +4,8 @@ An API to dig out information about any website be it their tech-stack, traffic,
 
 ## Starting the Development Environment 💻
 
----
 
-Before following any of the steps below. Create a **.env** in the root of the project directory. Here is sample:-
+Before following any of the steps below. Create a **.env** in the root of the project directory. Here is a sample:-
 
 ```
 MONGODB_URI="localhost:27017"
@@ -25,7 +24,7 @@ Let's continue :-
 
    `$ docker-compose up`
 
-3) BuiltWith has a very small free tier - So I saved the data for some domains into a json file and used json-server to serve as a mock API end-point for presentational purposes. The application has a source module for the actual BuiltWith API endpoint as well, whch can be swapped in anytime as per the needs.
+3) BuiltWith has a very small free tier - So I saved the data for some domains into a json file and used json-server to serve as a mock API end-point for presentational purposes. The application has a source module for the actual BuiltWith API endpoint as well, which can be swapped in anytime as per the needs.
 
    The mock api currently contains data for the following domains flipkart.com, naya.ai, builtwith.com, amazon.com, spotify.com, miniclip.com, swym.it, bbc.com.
 
@@ -53,7 +52,8 @@ For Public API docs - Click [Here](http://localhost:5000/api/v1/docs)
 
 For Admin API docs- Click [Here](http://localhost:5000/admin/v1/docs)
 
-### How do I switch from mock to standard BuiltWith API endpoint
+
+### How do I switch from mock to standard BuiltWith API endpoint ❓
 
 ---
 
